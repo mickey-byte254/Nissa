@@ -3,220 +3,385 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy 18th Birthday!</title>
-
-    <!-- Mobile Web App Metadata -->
-    <meta name="theme-color" content="#1a120b">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="mobile-web-app-capable" content="yes">
-
+    <title>Happy Birthday!</title>
     <style>
         :root {
-            --bg-color: #1a120b;          /* Deep rich chocolate dark brown */
-            --text-color: #f5f2eb;        /* Soft premium cream */
-            --accent-color: #d4af37;      /* Metallic gold */
-            --secondary-accent: #aa7c11;  /* Warm bronze */
-            --card-bg: rgba(30, 22, 15, 0.65); /* Semi-transparent for glassmorphism */
+            --gold: #D4AF37;
+            --caramel: #8B5A2B;
+            --cream: #FFFDD0;
+            --dark-brown: #3E2723;
+            --soft-brown: #A07855;
         }
-
-        * {
-            box-sizing: border-box;
+        body, html {
             margin: 0;
             padding: 0;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
+            width: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--cream);
+            color: var(--dark-brown);
             overflow-x: hidden;
-            position: relative;
+        }
+        body {
+            text-align: center;
         }
 
-        /* Ambient Continuous Gold Confetti Animation */
-        body::before {
-            content: "";
-            position: absolute;
+        /* 👑 Gold Flakes Background Canvas */
+        #flakes-canvas {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1;
-            background-image: 
-                radial-gradient(circle, var(--accent-color) 10%, transparent 11%),
-                radial-gradient(circle, var(--secondary-accent) 10%, transparent 11%),
-                radial-gradient(circle, #fff 5%, transparent 6%);
-            background-size: 400px 400px, 350px 350px, 500px 500px;
-            background-position: 0 0, 40px 60px, 130px 270px;
-            animation: confettiRain 12s linear infinite;
-            opacity: 0.25;
+            z-index: 9999;
         }
 
-        @keyframes confettiRain {
-            0% { background-position: 0 0, 40px 60px, 130px 270px; }
-            100% { background-position: 0 400px, 40px 410px, 130px 770px; }
-        }
-
-        .container {
+        /* 🚪 1. Welcome Page Overlay */
+        #welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 600px; /* Perfectly optimized for modern mobile screen bounds */
-            text-align: center;
-            z-index: 2; /* Sits above the confetti background layer */
+            height: 100%;
+            background: linear-gradient(135deg, var(--dark-brown), #1a0f0d);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.8s ease-out, visibility 0.8s;
+            color: var(--cream);
         }
-
-        header {
-            margin-bottom: 40px;
-        }
-
-        h1 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 12px;
-            background: linear-gradient(135deg, #fff 10%, var(--accent-color) 60%, var(--secondary-accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            color: #a4998e;
-            font-weight: 400;
-            letter-spacing: 0.5px;
-        }
-
-        .stats-section-title {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent-color);
+        #welcome-screen h1 {
+            font-size: 3rem;
+            color: var(--gold);
             margin-bottom: 20px;
-            font-weight: 600;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
         }
-
-        .stats-container {
-            display: grid;
-            grid-template-columns: 1fr; /* Default to mobile vertical stacking layout */
-            gap: 16px;
-            margin-bottom: 40px;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            padding: 24px;
-            border-radius: 16px;
-            border: 1px solid rgba(214, 175, 55, 0.15);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .stat-card:active {
-            transform: scale(0.98); /* Touch feedback scale effect on mobile tap */
-        }
-
-        .stat-num {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--accent-color);
-            margin-bottom: 6px;
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-size: 0.95rem;
-            color: #d4cebc;
-            font-weight: 500;
-        }
-
-        .cta-wrapper {
-            margin-top: 10px;
-        }
-
-        .cta-label {
-            display: block;
-            font-size: 0.8rem;
-            color: #8c7e74;
-            margin-bottom: 8px;
-            font-family: monospace;
-        }
-
-        .cta-btn {
-            background: linear-gradient(135deg, var(--accent-color), var(--secondary-accent));
-            color: #1a120b;
+        .enter-btn {
+            background-color: var(--gold);
+            color: var(--dark-brown);
             border: none;
-            padding: 18px 40px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            border-radius: 50px;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 30px;
             cursor: pointer;
-            width: 100%; /* Spans comfortably across mobile screens for full-width thumb target */
-            max-width: 320px;
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
             transition: transform 0.2s, box-shadow 0.2s;
-            -webkit-tap-highlight-color: transparent;
+        }
+        .enter-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
         }
 
-        .cta-btn:active {
-            transform: scale(0.96);
-            box-shadow: 0 3px 10px rgba(212, 175, 55, 0.2);
+        /* 🗺️ Main Content Container */
+        #main-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in;
+            padding-bottom: 100px;
+        }
+        
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(rgba(62, 39, 35, 0.6), rgba(62, 39, 35, 0.6)), url('images/hero.jpg') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--cream);
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
-        /* Responsive Breakpoint handling for Desktop/Tablet Viewports */
-        @media (min-width: 600px) {
-            h1 { font-size: 3.5rem; }
-            .stats-container {
-                grid-template-columns: repeat(3, 1fr); /* Reverts cleanly back to side-by-side on wide screens */
-            }
+        /* Music Floating Control */
+        .music-overlay {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--dark-brown);
+            color: var(--cream);
+            padding: 15px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            border: 2px solid var(--gold);
+        }
+        .music-btn {
+            background: var(--gold);
+            border: none;
+            color: var(--dark-brown);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Photo Albums */
+        .album-section {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        .album-title {
+            font-size: 2rem;
+            color: var(--caramel);
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        /* Polaroid Cards */
+        .polaroid {
+            background: white;
+            padding: 15px 15px 30px 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .polaroid:nth-child(even) { transform: rotate(2deg); }
+        .polaroid:nth-child(odd) { transform: rotate(-2deg); }
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.03);
+            box-shadow: 0 8px 25px rgba(139, 90, 43, 0.3);
+        }
+        .polaroid img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background-color: #f0ebe1;
+        }
+        .polaroid p {
+            margin: 15px 0 0 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+
+        /* Video Section */
+        .video-section {
+            max-width: 800px;
+            margin: 80px auto 40px auto;
+            padding: 0 20px;
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            border: 5px solid white;
+            background: #000;
+        }
+        .video-wrapper iframe, .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Happy 18th Birthday!</h1>
-            <p class="subtitle">Welcome to Version 18.0 — The Ultimate Update</p>
-        </header>
+    <!-- 🌌 Endless Gold Flakes Engine -->
+    <canvas id="flakes-canvas"></canvas>
 
-        <p class="stats-section-title">Celebrating Our Friendship Stats</p>
-
-        <div class="stats-container">
-            <div class="stat-card">
-                <div class="stat-num">18</div>
-                <div class="stat-label">Years of Being Awesome</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-num">∞</div>
-                <div class="stat-label">Inside Jokes Shared</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-num">Best</div>
-                <div class="stat-label">Friend Status Locked</div>
-            </div>
+    <!-- 🚪 1. Welcome Screen Overlay -->
+    <div id="welcome-screen">
+        <h1>A Golden Surprise Awaits... ✨</h1>
+        <button class="enter-btn" onclick="unlockBirthdayPage()">Open Your Gift</button>
+    </div>
+    <!-- 🗺️ 2. Main Interactive Birthday Content -->
+    <div id="main-content">
+        
+        <!-- 🎵 Soundtrack Track -->
+        <div class="music-overlay">
+            <span>🎵 Soundtrack Active</span>
+            <audio id="bg-music" loop>
+                <source src="audio/background-track.mp3" type="audio/mpeg">
+            </audio>
+            <button class="music-btn" id="music-toggle" onclick="toggleMusic()">⏸</button>
         </div>
 
-        <div class="cta-wrapper">
-            <span class="cta-label">.Call to Action</span>
-            <button class="cta-btn" onclick="celebrate()">Click for a Surprise</button>
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Cheers to Your Golden Year!</h1>
+            <p>Scroll down to look back at our best moments...</p>
         </div>
+
+        <!-- Album 1 -->
+        <section class="album-section">
+            <h2 class="album-title">✨ Our Wildest Adventures</h2>
+            <div class="album-grid">
+                <div class="polaroid" onclick="revealMessage('Trip to the beach!')">
+                    <img src="images/adventure1.jpg" alt="Adventure 1">
+                    <p>Click to open 🏝️</p>
+                </div>
+                <div class="polaroid" onclick="revealMessage('That chaotic late-night road trip.')">
+                    <img src="images/adventure2.jpg" alt="Adventure 2">
+                    <p>Click to open 🚗</p>
+                </div>
+                <div class="polaroid" onclick="revealMessage('Concert of the century!')">
+                    <img src="images/adventure3.jpg" alt="Adventure 3">
+                    <p>Click to open 🎸</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Album 2 -->
+        <section class="album-section">
+            <h2 class="album-title">☕ The Cozy & Silly Days</h2>
+            <div class="album-grid">
+                <div class="polaroid" onclick="revealMessage('Unstoppable cafe study sessions.')">
+                    <img src="images/cozy1.jpg" alt="Cozy 1">
+                    <p>Click to open ☕</p>
+                </div>
+                <div class="polaroid" onclick="revealMessage('Mid-laugh candid shot!')">
+                    <img src="images/cozy2.jpg" alt="Cozy 2">
+                    <p>Click to open 😂</p>
+                </div>
+                <div class="polaroid" onclick="revealMessage('Matching outfits completely by accident.')">
+                    <img src="images/cozy3.jpg" alt="Cozy 3">
+                    <p>Click to open 👯‍♀️</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Finale -->
+        <section class="video-section">
+            <h2 class="album-title" style="text-align: center;">🎥 A Special Message For You</h2>
+            <div class="video-wrapper">
+                <iframe src="https://youtube.com" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
     </div>
 
+    <!-- 🛠️ Core Interactivity & Animation Scripts -->
     <script>
-        function celebrate() {
-            // Replaces the basic alert with an interactive mobile prompt
-            alert("🎉 Happy 18th Birthday! Your real gift is waiting on your phone!");
+        const music = document.getElementById('bg-music');
+        const btn = document.getElementById('music-toggle');
+
+        function unlockBirthdayPage() {
+            const welcome = document.getElementById('welcome-screen');
+            const mainContent = document.getElementById('main-content');
+            
+            welcome.style.opacity = '0';
+            welcome.style.visibility = 'hidden';
+            
+            mainContent.style.display = 'block';
+            setTimeout(() => {
+                mainContent.style.opacity = '1';
+            }, 50);
+
+            music.play().catch(err => console.log("Audio play blocked initially: ", err));
         }
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                btn.textContent = "⏸";
+            } else {
+                music.pause();
+                btn.textContent = "▶";
+            }
+        }
+
+        function revealMessage(text) {
+            alert(text);
+        }
+
+        /* 👑 Canvas Gold Flake Animation Engine */
+        const canvas = document.getElementById('flakes-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const flakeCount = 45;
+        const flakes = [];
+
+        class GoldFlake {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height - height;
+                this.size = Math.random() * 4 + 2; 
+                this.speedY = Math.random() * 1.5 + 0.8; 
+                this.speedX = Math.random() * 1 - 0.5; 
+                this.opacity = Math.random() * 0.6 + 0.4;
+                this.rotation = Math.random() * 360;
+                this.rotationSpeed = Math.random() * 2 - 1;
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                this.rotation += this.rotationSpeed;
+
+                if (this.y > height || this.x < -20 || this.x > width + 20) {
+                    this.reset();
+                    this.y = -10;
+                }
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation * Math.PI / 180);
+                ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+                
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(this.size, this.size * 0.3);
+                ctx.lineTo(this.size * 0.8, this.size * 1.2);
+                ctx.lineTo(-this.size * 0.2, this.size);
+                ctx.closePath();
+                ctx.fill();
+                
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < flakeCount; i++) {
+            flakes.push(new GoldFlake());
+            flakes[i].y = Math.random() * height; 
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            flakes.forEach(flake => {
+                flake.update();
+                flake.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
     </script>
 </body>
 </html>
