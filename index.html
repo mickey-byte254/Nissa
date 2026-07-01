@@ -80,7 +80,6 @@
             display: none;
             opacity: 0;
             transition: opacity 1s ease-in;
-            padding-bottom: 100px;
         }
         
         /* Hero Banner */
@@ -180,7 +179,7 @@
         /* Video Section */
         .video-section {
             max-width: 800px;
-            margin: 80px auto 40px auto;
+            margin: 80px auto 60px auto;
             padding: 0 20px;
         }
         .video-wrapper {
@@ -199,6 +198,21 @@
             width: 100%;
             height: 100%;
         }
+
+        /* 📝 Custom Footer Element */
+        footer {
+            background-color: var(--dark-brown);
+            color: var(--cream);
+            padding: 30px 20px;
+            font-size: 0.95rem;
+            border-top: 3px solid var(--gold);
+            line-height: 1.6;
+        }
+        footer .made-with-love {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--gold);
+        }
     </style>
 </head>
 <body>
@@ -208,7 +222,8 @@
 
     <!-- 🚪 1. Welcome Screen Overlay -->
     <div id="welcome-screen">
-        <h1>A Golden Surprise Awaits... ✨</h1>
+        <!-- ✏️ EDIT HERE: Replace "Her Name" with her actual name -->
+        <h1>A Golden Surprise Awaits, pookie... ✨</h1>
         <button class="enter-btn" onclick="unlockBirthdayPage()">Open Your Gift</button>
     </div>
     <!-- 🗺️ 2. Main Interactive Birthday Content -->
@@ -225,7 +240,8 @@
 
         <!-- Hero Section -->
         <div class="hero">
-            <h1>Cheers to Your Golden Year!</h1>
+            <!-- ✏️ EDIT HERE: Personalize her name in the main heading banner -->
+            <h1>Cheers to Your Golden Year, Malaika!</h1>
             <p>Scroll down to look back at our best moments...</p>
         </div>
 
@@ -274,6 +290,13 @@
                 <iframe src="https://youtube.com" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </section>
+
+        <!-- 📝 Custom Footer Section -->
+        <footer>
+            <!-- ✏️ EDIT HERE: Swap out "Your Name" with your own signature -->
+            <div class="made-with-love">Made with ❤️ by Mickey ✨️</div>
+            <div>&copy; 2026 All Rights Reserved. Designed especially for my best friend.</div>
+        </footer>
 
     </div>
 
